@@ -1,2 +1,2 @@
 # Advent of Code 2022
-My solution to the AOC 2022 coding challenged with some RSpec practice too.
+My solutions to the AOC 2022 coding challenges with some RSpec practice too.
