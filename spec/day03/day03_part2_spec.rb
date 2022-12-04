@@ -1,6 +1,6 @@
 require_relative '../../lib/day03/day03_part2'
 
-RSpec.describe 'Sorting backpacks part 2' do
+RSpec.describe '#calculate' do
   let(:input) do
     'vJrwpWtwJgWrhcsFMMfFFhFp
     jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
@@ -10,7 +10,7 @@ RSpec.describe 'Sorting backpacks part 2' do
     CrZsJsPPZsGzwwsLwLmpwMDw'
   end
 
-  it '#calculate should return value of common items between 3 elves' do
+  it 'should return value of common items between 3 elves' do
     expect(calculate(input)).to eq(70)
   end
 end

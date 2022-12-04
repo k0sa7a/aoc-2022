@@ -16,12 +16,15 @@ RSpec.describe 'Finding elf with most food' do
 
     10000'
   end
-
-  it '#calculate should return total food for top elf' do
-    expect(calculate(food)).to eq(24_000)
+  describe '#calculate' do
+    it 'should return total food for top elf' do
+      expect(calculate(food)).to eq(24_000)
+    end
   end
 
-  it '#calculate_top_three should return total food for top 3 elves' do
-    expect(calculate_top_three(food)).to eq(45_000)
+  describe '#calculate_top_three' do
+    it 'should return total food for top 3 elves' do
+      expect(calculate_top_three(food)).to eq(45_000)
+    end
   end
 end

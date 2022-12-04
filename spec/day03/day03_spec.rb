@@ -1,6 +1,6 @@
 require_relative '../../lib/day03/day03'
 
-RSpec.describe 'Sorting backpacks' do
+RSpec.describe '#calculate' do
   let(:input) do
     'vJrwpWtwJgWrhcsFMMfFFhFp
     jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
@@ -10,7 +10,7 @@ RSpec.describe 'Sorting backpacks' do
     CrZsJsPPZsGzwwsLwLmpwMDw'
   end
 
-  it '#calculate should return value of replicated items' do
+  it 'should return value of replicated items' do
     expect(calculate(input)).to eq(157)
   end
 end
