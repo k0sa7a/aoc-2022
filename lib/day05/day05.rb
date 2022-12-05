@@ -18,6 +18,23 @@ def calculate(input_01, input_02)
   result
 end
 
+def calculate_9001(input_01, input_02)
+  stacks = [[]]
+  result = ""
+  instructions = adjust_input_02(input_02)
+  column_arr = adjust_input_01(input_01)
+  column_arr.each {|column| stacks << column}
+
+  instructions.each do |hash|
+    moved_containers = stacks[hash[:start_arr]].slice!(0..(hash[:times]-1))
+    stacks[hash[:end_arr]].unshift(moved_containers)
+    stacks[hash[:end_arr]].flatten!
+  end
+  stacks.delete_at(0)
+  stacks.each {|stack| result << stack.first}
+  result
+end
+
 def adjust_input_01(input_01)
   arr = []
   CSV.foreach(input_01) do |row|
@@ -57,6 +74,5 @@ def adjust_input_02(input_02)
   arr
 end
 
-# p adjust_input_01('./lib/day05/input_01.csv')
-# p adjust_input_02('./lib/day05/input_02.csv')
-p calculate('./lib/day05/input_01.csv', './lib/day05/input_02.csv')
+# p calculate('./lib/day05/input_01.csv', './lib/day05/input_02.csv')
+# p calculate_9001('./lib/day05/input_01.csv', './lib/day05/input_02.csv')
