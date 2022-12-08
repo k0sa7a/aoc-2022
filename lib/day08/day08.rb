@@ -1,6 +1,5 @@
 require 'csv'
 require_relative 'Tree'
-require 'pry-byebug'
 
 def adjust_input(file_path)
   arr = []
@@ -15,54 +14,22 @@ def adjust_input(file_path)
 end
 
 def set_visible_and_score_on_outside_trees(arr)
-  arr.first.each{|tree| tree.visible = true}
-  arr.first.each{|tree| tree.score = 0}
-  arr.last.each{|tree| tree.visible = true}
-  arr.last.each{|tree| tree.score = 0}
-  arr.each do |small_arr|
-    small_arr.each do |tree|
-      if small_arr.first == tree || small_arr.last == tree
-        tree.visible = true
-        tree.score = 0
-      end
-    end
+  arr.first.each do |tree|
+    tree.visible = true
+    tree.score = 0
+  end
+
+  arr.last.each do|tree|
+    tree.visible = true
+    tree.score = 0
+  end
+
+  arr.each do |inner_arr|
+    inner_arr.first.visible = true
+    inner_arr.last.score = 0
   end
   arr
 end
-
-def helper_visualise(arr)
-  arr.each do |small_arr|
-    small_arr.each{|tree| print "#{tree.height}      "}
-    puts "\n \n"
-  end
-  puts "<------------->"
-  arr.each do |small_arr|
-    small_arr.each{|tree| print "#{tree.score}  "}
-    puts "\n \n"
-  end
-end
-
-
-# def set_visible_on_inner_trees_all_sides(arr)
-#   arr.each do |row|
-#     row.each do |tree|
-#       if tree.visible == "????"
-#         to_check = row.map {|tr| tr.height}
-#         to_check.delete_at(row.find_index(tree))
-#         for i in 0..(arr.size) -1
-#           for n in 0..(arr[i].size) -1
-#             if (i < arr.find_index(row)) || (i > arr.find_index(row))
-#               if (n == row.find_index(tree))
-#                 to_check << arr[i][n].height
-#               end
-#             end
-#           end
-#         end
-#         tree.visible = to_check.all? {|value| value < tree.height}
-#       end
-#     end
-#   end
-# end
 
 def set_visible_on_inner_trees(arr)
   arr.each do |row|
@@ -76,7 +43,6 @@ def set_visible_on_inner_trees(arr)
         for i in 0..(arr.size) -1
           for n in 0..(arr[i].size) -1
               if (n == row.find_index(tree))
-                to_check << arr[i][n].height
                 if (i < arr.find_index(row))
                   up << arr[i][n].height
                 elsif (i > arr.find_index(row))
@@ -127,7 +93,7 @@ def set_score_on_inner_trees(arr)
           end
         end
         left_check = left.all? {|value| value < tree.height}
-        if left_check == true
+        if left_check
           left_score += (left.size)
         else
           left.reverse_each do |t|
@@ -139,7 +105,7 @@ def set_score_on_inner_trees(arr)
         end
 
         right_check = right.all? {|value| value < tree.height}
-        if right_check == true
+        if right_check
           right_score += (right.size)
         else
           right.each do |t|
@@ -151,7 +117,7 @@ def set_score_on_inner_trees(arr)
         end
 
         up_check = up.all? {|value| value < tree.height}
-        if up_check == true
+        if up_check
           up_score += (up.size)
         else
           up.reverse_each do |t|
@@ -163,7 +129,7 @@ def set_score_on_inner_trees(arr)
         end
 
         down_check = down.all? {|value| value < tree.height}
-        if down_check == true
+        if down_check
           down_score += (down.size)
         else
           down.each do |t|
@@ -203,13 +169,13 @@ def find_best_score(arr)
 end
 
 # Part 01
-# arr = adjust_input('lib/day08/test.csv')
+# arr = adjust_input('lib/day08/input.csv')
 # arr_visib = set_visible_and_score_on_outside_trees(arr)
 # set_visible_on_inner_trees(arr_visib)
 # p calculate_visible(arr_visib)
 
 # Part 02
-# arr = adjust_input('lib/day08/test.csv')
+# arr = adjust_input('lib/day08/input.csv')
 # arr_visib = set_visible_and_score_on_outside_trees(arr)
 # set_score_on_inner_trees(arr_visib)
 # p find_best_score(arr_visib)
