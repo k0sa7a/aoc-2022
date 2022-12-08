@@ -43,9 +43,9 @@ def set_visible_on_inner_trees(arr)
     if i > 0 && i < (arr.size) - 1
       for n in 0..(arr[i].size) -1
         if n > 0 && n < (arr[i].size) -1
-          here we check if the innter trees will be visible based on all the trees from them
-          to the outside
-          we can to ranges
+          # here we check if the innter trees will be visible based on all the trees from them
+          # to the outside
+          # we can to ranges
         end
       end
     end
